@@ -1,0 +1,12 @@
+{
+  "name": "projectcamp",
+  "version": "1.0.0",
+  "description": "Project Management Platform",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
