@@ -15,7 +15,7 @@ const userSchema = new Schema(
         localPath: "",
       },
     },
-    user: {
+    username: {
       type: String,
       required: true,
       unique: true,
@@ -28,10 +28,6 @@ const userSchema = new Schema(
       required: true,
       unique: true,
       lowercase: true,
-      trim: true,
-    },
-    fullName: {
-      type: String,
       trim: true,
     },
     fullName: {
@@ -69,7 +65,7 @@ const userSchema = new Schema(
 
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-  this.password = bcrypt.hash(this.password, 10);
+  this.password = await bcrypt.hash(this.password, 10);
   next();
 });
 
@@ -107,7 +103,7 @@ userSchema.methods.generateEmptyToken = function () {
   const unHashedToken = crypto.randomBytes(20).toString("hex");
 
   const hashedToken = crypto
-    .createHash("sha356")
+    .createHash("sha256")
     .update(unHashedToken)
     .digest("hex");
 
