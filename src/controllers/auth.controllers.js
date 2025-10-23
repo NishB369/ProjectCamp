@@ -160,7 +160,7 @@ const getCurrentUser = asyncHandler(async (req, res) => {
 });
 
 const verifyEmail = asyncHandler(async (req, res) => {
-  const verificationToken = req.params;
+  const { verificationToken } = req.params;
 
   if (!verificationToken) {
     throw new ApiError(400, "Email Verification Token is Missing");
@@ -197,7 +197,7 @@ const verifyEmail = asyncHandler(async (req, res) => {
   );
 });
 
-const recentEmailVerification = asyncHandler(async (req, res) => {
+const resendEmailVerification = asyncHandler(async (req, res) => {
   const user = User.findById(req.user?._id);
 
   if (!user) {
@@ -370,8 +370,9 @@ export {
   logout,
   getCurrentUser,
   verifyEmail,
-  recentEmailVerification,
+  resendEmailVerification,
   refreshAccessToken,
   forgotPasswordRequest,
   changeCurrentPassword,
+  resetForgotPassword,
 };
